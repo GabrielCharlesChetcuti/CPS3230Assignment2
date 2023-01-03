@@ -1,0 +1,29 @@
+States:
+- Viewing Alerts (Start State)
+- Empty Alerts List
+- Populated Alerts List
+- Check Alerts Data
+- Three Alerts Check
+- Unintentionally  Populated Alerts List (Final State)
+- Unpopulated Alerts List (Final State)
+- Incorrect Post Data (Final State)
+- Incorrect Amount Of Alerts (Final State)
+- Posted Succesfully (Final State)
+
+Variables:
+- ViewingAlerts
+- Delete
+- AlertsListPopulated
+- CorrectData
+- ThreeAlerts
+
+Transitions:
+- ViewingAlerts -> UnintentionallyPopulatedAlertsList \ NotDeleteOccured \ Delete = false; ViewingAlerts = true
+- ViewingAlerts -> EmptyAlertsList \ DeleteOccured \ Delete = true; ViewingAlerts = true
+- EmptyAlertsList -> PopulatedAlertsList \ AlertsPopulated \ Delete = true; AlertsListPopulated = true
+- EmptyAlertsList -> UnpopulatedAlertsList \ AlertsNotPopulated \ Delete = true; AlertsListPopulated = false
+- PopulatedAlertsList -> CheckAlertsData \ DataCheck \ AlertsListPopulated = true; CorrectData = false
+- CheckAlertsData -> IncorrectPostData \ IncorrectDataPosted \ CorrectData = false; AlertsListPopulated = true
+- CheckAlertsData -> ThreeAlertsCheck \ CorrectDataPosted \ CorrectData = true; AlertsListPopulated = true
+- ThreeAlertsCheck -> IncorrectAmountOfAlerts \ IncorrectNumberOfAlerts \ ThreeAlerts = false; CorrectData = true
+- ThreeAlertsCheck -> PostedSuccesfully \ CorrectNumberOfAlerts \ ThreeAlerts = true; CorrectData = true
