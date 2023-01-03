@@ -1,0 +1,46 @@
+GLOBAL {
+
+    VARIABLES{
+
+
+    }
+
+    EVENTS{
+
+        correctLogin() = {*.correctLogin()}
+        incorrectLogin() = {*.incorrectLogin()}
+        viewAlerts() = {*.viewAlerts()}
+        purpouselyLoggedOut() = {*.purpouselyLoggedOut()}
+    }
+
+    Property login{
+
+        STATES{
+        	ACCEPTING
+        	{
+        		viewingAlerts
+        		BadLoginError401
+        		PurpouselyloggedOut
+        	}
+            BAD
+            {}
+            NORMAL
+            {
+                loggedIn
+            }
+            STARTING
+            {
+                 InitiallyloggedOut
+            }
+            }
+        TRANSITIONS{
+
+                InitiallyloggedOut -> BadLoginError401 [incorrectLogin()\\System.out.println("loggedOut -> BadLoginError401");]
+                InitiallyloggedOut -> loggedIn [correctLogin()\\System.out.println("loggedOut -> loggedIn");]
+                loggedIn -> viewingAlerts [viewAlerts()\\System.out.println("loggedIn - > viewingAlerts");]
+                loggedIn -> PurpouselyloggedOut [purpouselyLoggedOut()\\System.out.println("LoggedIn -> LoggedOut");]
+                viewingAlerts -> PurpouselyloggedOut [purpouselyLoggedOut()\\System.out.println("ViewingAlerts -> LoggedOut");]
+            }
+        }
+
+    }

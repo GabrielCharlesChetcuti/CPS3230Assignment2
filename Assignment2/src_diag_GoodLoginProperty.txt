@@ -1,0 +1,8 @@
+digraph _logic_GoodLoginProperty {
+rankdir=LR;
+node [shape = circle]; Test Unblocked;
+node [shape = octagon]; BadTest;
+node [shape = point]; _s_s;
+_s_s -> Unblocked;
+Unblocked -> Test [ label = "(1) GoodLogin"];
+}

@@ -1,0 +1,12 @@
+digraph _logic_login {
+rankdir=LR;
+node [shape = doublecircle]; viewingAlerts BadLoginError401 PurpouselyloggedOut;
+node [shape = circle]; loggedIn InitiallyloggedOut;
+node [shape = point]; _s_s;
+_s_s -> InitiallyloggedOut;
+viewingAlerts -> PurpouselyloggedOut [ label = "(1) purpouselyLoggedOut\\\\System . out . println ( \" ViewingAlerts -> LoggedOut \" ) ; "];
+InitiallyloggedOut -> BadLoginError401 [ label = "(1) incorrectLogin\\\\System . out . println ( \" loggedOut -> BadLoginError401 \" ) ; "];
+InitiallyloggedOut -> loggedIn [ label = "(2) correctLogin\\\\System . out . println ( \" loggedOut -> loggedIn \" ) ; "];
+loggedIn -> viewingAlerts [ label = "(1) viewAlerts\\\\System . out . println ( \" loggedIn - > viewingAlerts \" ) ; "];
+loggedIn -> PurpouselyloggedOut [ label = "(2) purpouselyLoggedOut\\\\System . out . println ( \" LoggedIn -> LoggedOut \" ) ; "];
+}

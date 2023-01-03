@@ -1,0 +1,64 @@
+GLOBAL {
+
+    VARIABLES{
+
+
+    }
+
+    EVENTS{
+
+        Alerts() = {*.Alerts()}
+        PostedSuccesfully() = {*.PostedSuccesfully()}
+        PostedUnsuccesfully() = {*.PostedUnsuccesfully()}
+        succesfulDelete() = {*.succesfulDelete()}
+        unsuccesfulDelete() = {*.unsuccesfulDelete()}
+        checkAlertsData() = {*.checkAlertsData()}
+        dataPostedSuccesfully() = {*.dataPostedSuccesfully()}
+        dataPostedUnsuccesfully() = {*.dataPostedUnsuccesfully()}
+        checkNumberOfAlerts() = {*.checkNumberOfAlerts()}
+        DataErrorOutput() = {*.DataErrorOutput()}
+        }
+
+
+    Property alerts{
+
+        STATES{
+        	ACCEPTING
+        	{
+        		UnintentionallyPopulatedAlertsList 
+        		UnpopulatedAlertsList
+        		IncorrectPostData
+        		IncorrectAmountOfAlerts
+        		PostedSuccesfully 
+        	}
+            BAD{}
+            NORMAL
+            {
+            	EmptyAlertsList
+            	PopulatedAlertsList
+            	CheckAlertsData
+            	ThreeAlertsCheck
+            }
+            STARTING
+            {
+                 ViewingAlerts
+            }
+          }
+        TRANSITIONS{
+				ViewingAlerts -> UnintentionallyPopulatedAlertsList[unsuccesfulDelete()\\System.out.println("ViewingAlerts -> UnintentionallyPopulatedAlertsList");]
+				ViewingAlerts -> EmptyAlertsList [succesfulDelete()\\System.out.println("ViewingAlerts -> EmptyAlertsList");]
+				EmptyAlertsList -> PopulatedAlertsList [PostedSuccesfully()\\System.out.println("EmptyAlertsList -> PopulatedAlertsList");]
+				EmptyAlertsList -> UnpopulatedAlertsList [PostedUnsuccesfully()\\System.out.println("EmptyAlertsList -> UnpopulatedAlertsList");]
+				PopulatedAlertsList -> CheckAlertsData [checkAlertsData()\\System.out.println("PopulatedAlertsList -> CheckAlertsData");]
+				CheckAlertsData -> IncorrectPostData [DataErrorOutput()\\System.out.println("CheckAlertsData -> IncorrectPostData");]
+				CheckAlertsData -> ThreeAlertsCheck [checkNumberOfAlerts()\\System.out.println("CheckAlertsData -> ThreeAlertsCheck");]
+				ThreeAlertsCheck -> IncorrectAmountOfAlerts [dataPostedUnsuccesfully()\\System.out.println("ThreeAlertsCheck -> IncorrectAmountOfAlerts");]
+				ThreeAlertsCheck -> PostedSuccesfully [dataPostedSuccesfully()\\System.out.println("ThreeAlertsCheck -> PostedSuccesfully");]
+            }
+        }
+	}
+
+
+    
+    
+    

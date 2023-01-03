@@ -1,0 +1,16 @@
+digraph _logic_alerts {
+rankdir=LR;
+node [shape = doublecircle]; UnintentionallyPopulatedAlertsList UnpopulatedAlertsList IncorrectPostData IncorrectAmountOfAlerts PostedSuccesfully;
+node [shape = circle]; EmptyAlertsList PopulatedAlertsList CheckAlertsData ThreeAlertsCheck ViewingAlerts;
+node [shape = point]; _s_s;
+_s_s -> ViewingAlerts;
+PopulatedAlertsList -> CheckAlertsData [ label = "(1) checkAlertsData\\\\System . out . println ( \" PopulatedAlertsList -> CheckAlertsData \" ) ; "];
+CheckAlertsData -> IncorrectPostData [ label = "(1) DataErrorOutput\\\\System . out . println ( \" CheckAlertsData -> IncorrectPostData \" ) ; "];
+CheckAlertsData -> ThreeAlertsCheck [ label = "(2) checkNumberOfAlerts\\\\System . out . println ( \" CheckAlertsData -> ThreeAlertsCheck \" ) ; "];
+ViewingAlerts -> UnintentionallyPopulatedAlertsList [ label = "(1) unsuccesfulDelete\\\\System . out . println ( \" ViewingAlerts -> UnintentionallyPopulatedAlertsList \" ) ; "];
+ViewingAlerts -> EmptyAlertsList [ label = "(2) succesfulDelete\\\\System . out . println ( \" ViewingAlerts -> EmptyAlertsList \" ) ; "];
+EmptyAlertsList -> PopulatedAlertsList [ label = "(1) PostedSuccesfully\\\\System . out . println ( \" EmptyAlertsList -> PopulatedAlertsList \" ) ; "];
+EmptyAlertsList -> UnpopulatedAlertsList [ label = "(2) PostedUnsuccesfully\\\\System . out . println ( \" EmptyAlertsList -> UnpopulatedAlertsList \" ) ; "];
+ThreeAlertsCheck -> IncorrectAmountOfAlerts [ label = "(1) dataPostedUnsuccesfully\\\\System . out . println ( \" ThreeAlertsCheck -> IncorrectAmountOfAlerts \" ) ; "];
+ThreeAlertsCheck -> PostedSuccesfully [ label = "(2) dataPostedSuccesfully\\\\System . out . println ( \" ThreeAlertsCheck -> PostedSuccesfully \" ) ; "];
+}

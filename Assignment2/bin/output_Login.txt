@@ -1,0 +1,3 @@
+[login]AUTOMATON::> login() STATE::>InitiallyloggedOut
+loggedOut -> BadLoginError401
+[login]MOVED ON METHODCALL: void main.runner.incorrectLogin() TO STATE::> (((SYSTEM REACHED AN ACCEPTED STATE)))  BadLoginError401
